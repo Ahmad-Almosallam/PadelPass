@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8EB972AB-59FD-4B5D-B5D5-311E42E72AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadelPass.Api", "src\PadelPass.Api\PadelPass.Api.csproj", "{9C7F1713-514A-4EFF-91BE-FF664DE8B27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadelPass.Application", "src\PadelPass.Application\PadelPass.Application.csproj", "{2B680F91-FE3C-4D25-ADD5-04A94354D7BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadelPass.Core", "src\PadelPass.Core\PadelPass.Core.csproj", "{D5AEBD93-9188-42AA-88C7-7668D494F8C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadelPass.Infrastructure", "src\PadelPass.Infrastructure\PadelPass.Infrastructure.csproj", "{1C250043-71AE-4879-99A0-C0F36FD6B9FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C7F1713-514A-4EFF-91BE-FF664DE8B27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7F1713-514A-4EFF-91BE-FF664DE8B27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7F1713-514A-4EFF-91BE-FF664DE8B27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7F1713-514A-4EFF-91BE-FF664DE8B27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B680F91-FE3C-4D25-ADD5-04A94354D7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B680F91-FE3C-4D25-ADD5-04A94354D7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B680F91-FE3C-4D25-ADD5-04A94354D7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B680F91-FE3C-4D25-ADD5-04A94354D7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5AEBD93-9188-42AA-88C7-7668D494F8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AEBD93-9188-42AA-88C7-7668D494F8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AEBD93-9188-42AA-88C7-7668D494F8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AEBD93-9188-42AA-88C7-7668D494F8C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C250043-71AE-4879-99A0-C0F36FD6B9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C250043-71AE-4879-99A0-C0F36FD6B9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C250043-71AE-4879-99A0-C0F36FD6B9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C250043-71AE-4879-99A0-C0F36FD6B9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C7F1713-514A-4EFF-91BE-FF664DE8B27F} = {8EB972AB-59FD-4B5D-B5D5-311E42E72AE1}
+		{2B680F91-FE3C-4D25-ADD5-04A94354D7BC} = {8EB972AB-59FD-4B5D-B5D5-311E42E72AE1}
+		{D5AEBD93-9188-42AA-88C7-7668D494F8C5} = {8EB972AB-59FD-4B5D-B5D5-311E42E72AE1}
+		{1C250043-71AE-4879-99A0-C0F36FD6B9FB} = {8EB972AB-59FD-4B5D-B5D5-311E42E72AE1}
+	EndGlobalSection
+EndGlobal
