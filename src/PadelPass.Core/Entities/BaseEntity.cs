@@ -8,13 +8,13 @@ public abstract class BaseEntity
     public int Id { get; protected set; }
 
     [StringLength(50)]
-    public string CreatedBy { get; set; }
+    public string? CreatedBy { get; set; }
 
     [Required]
     public DateTime CreatedAt { get; set; }
 
     [StringLength(50)]
-    public string UpdatedBy { get; set; }
+    public string? UpdatedBy { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 }

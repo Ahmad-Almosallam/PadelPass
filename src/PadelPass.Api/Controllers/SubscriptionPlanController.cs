@@ -4,6 +4,7 @@ using PadelPass.Application.DTOs.SubscriptionPlans;
 using PadelPass.Application.Services;
 using PadelPass.Application.Services.Implementations;
 using PadelPass.Core.Common;
+using PadelPass.Core.Constants;
 using PadelPass.Core.Shared;
 
 namespace PadelPass.Api.Controllers;
@@ -45,7 +46,7 @@ public class SubscriptionPlansController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<SubscriptionPlanDto>>> Create(
         [FromBody] CreateSubscriptionPlanDto dto)
     {
@@ -59,7 +60,7 @@ public class SubscriptionPlansController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<SubscriptionPlanDto>>> Update(
         int id,
         [FromBody] UpdateSubscriptionPlanDto dto)
@@ -74,7 +75,7 @@ public class SubscriptionPlansController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(
         int id)
     {

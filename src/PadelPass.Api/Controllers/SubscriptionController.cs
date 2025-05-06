@@ -4,6 +4,7 @@ using PadelPass.Application.DTOs.Subscriptions;
 using PadelPass.Application.Services;
 using PadelPass.Application.Services.Implementations;
 using PadelPass.Core.Common;
+using PadelPass.Core.Constants;
 using PadelPass.Core.Shared;
 
 namespace PadelPass.Api.Controllers;
@@ -46,6 +47,7 @@ public class SubscriptionsController : ControllerBase
     }
 
     [HttpGet("current")]
+    [Authorize(AppRoles.User)]
     public async Task<ActionResult<ApiResponse<SubscriptionDto>>> GetCurrentUserSubscription()
     {
         var result = await _subscriptionService.GetCurrentUserSubscriptionAsync();
@@ -98,7 +100,7 @@ public class SubscriptionsController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(
         int id)
     {

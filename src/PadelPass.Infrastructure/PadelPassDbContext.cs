@@ -19,7 +19,7 @@ public class PadelPassDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
-    public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+    // public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
     public DbSet<Club> Clubs { get; set; }
     public DbSet<NonPeakSlot> NonPeakSlots { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }

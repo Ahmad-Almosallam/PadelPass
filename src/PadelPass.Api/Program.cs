@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using PadelPass.Application;
 using PadelPass.Core.Common;
+using PadelPass.Core.Constants;
 using PadelPass.Infrastructure;
 using PadelPass.Infrastructure.ExceptionHandling;
 using PadelPass.Infrastructure.Identity;
@@ -58,7 +59,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
         };
     });
-builder.Services.AddAuthorization(options => { options.AddPolicy("Admin", p => p.RequireRole("Admin")); });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(AppRoles.Admin, p => p.RequireRole(AppRoles.Admin, AppRoles.SuperAdmin));
+    options.AddPolicy(AppRoles.User, p => p.RequireRole(AppRoles.User));
+});
 // Infrastructure & Application Layers
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();

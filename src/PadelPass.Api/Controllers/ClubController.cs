@@ -4,6 +4,7 @@ using PadelPass.Application.DTOs.Clubs;
 using PadelPass.Application.Services;
 using PadelPass.Application.Services.Implementations;
 using PadelPass.Core.Common;
+using PadelPass.Core.Constants;
 using PadelPass.Core.Shared;
 
 namespace PadelPass.Api.Controllers;
@@ -45,7 +46,7 @@ public class ClubsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<ClubDto>>> Create(
         [FromBody] CreateClubDto dto)
     {
@@ -59,7 +60,7 @@ public class ClubsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<ClubDto>>> Update(
         int id,
         [FromBody] UpdateClubDto dto)
@@ -74,7 +75,7 @@ public class ClubsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(
         int id)
     {

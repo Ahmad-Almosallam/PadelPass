@@ -4,6 +4,7 @@ using PadelPass.Application.DTOs.NonPeakSlots;
 using PadelPass.Application.Services;
 using PadelPass.Application.Services.Implementations;
 using PadelPass.Core.Common;
+using PadelPass.Core.Constants;
 using PadelPass.Core.Shared;
 
 namespace PadelPass.Api.Controllers;
@@ -58,7 +59,7 @@ public class NonPeakSlotsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<NonPeakSlotDto>>> Create(
         [FromBody] CreateNonPeakSlotDto dto)
     {
@@ -72,7 +73,7 @@ public class NonPeakSlotsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<NonPeakSlotDto>>> Update(
         int id,
         [FromBody] UpdateNonPeakSlotDto dto)
@@ -87,7 +88,7 @@ public class NonPeakSlotsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = AppRoles.Admin)]
     public async Task<ActionResult<ApiResponse<bool>>> Delete(
         int id)
     {
