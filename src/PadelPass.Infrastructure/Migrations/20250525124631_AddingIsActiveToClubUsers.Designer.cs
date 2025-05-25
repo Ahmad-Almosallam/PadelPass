@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PadelPass.Infrastructure;
 
@@ -11,9 +12,11 @@ using PadelPass.Infrastructure;
 namespace PadelPass.Infrastructure.Migrations
 {
     [DbContext(typeof(PadelPassDbContext))]
-    partial class PadelPassDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525124631_AddingIsActiveToClubUsers")]
+    partial class AddingIsActiveToClubUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

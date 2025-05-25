@@ -20,5 +20,6 @@ public static class ApplicationServiceCollectionExtensions
         services.AddScoped<SubscriptionPlanService>();
         services.AddScoped<SubscriptionService>();
         services.AddScoped<AuthService>();
+        services.AddScoped<ClubUserService>();
     }
 }

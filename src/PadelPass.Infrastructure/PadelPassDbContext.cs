@@ -23,6 +23,7 @@ public class PadelPassDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Club> Clubs { get; set; }
     public DbSet<NonPeakSlot> NonPeakSlots { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<ClubUser> ClubUsers { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {

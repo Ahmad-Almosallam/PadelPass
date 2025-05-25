@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PadelPass.Application.DTOs.Clubs;
+using PadelPass.Application.DTOs.ClubUsers;
 using PadelPass.Application.DTOs.NonPeakSlots;
 using PadelPass.Application.DTOs.SubscriptionPlans;
 using PadelPass.Application.DTOs.Subscriptions;
@@ -40,5 +41,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PauseDate, opt => opt.MapFrom(src => (DateTime?)null))
             .ForMember(dest => dest.RemainingDays, opt => opt.MapFrom(src => (int?)null));
         CreateMap<UpdateSubscriptionDto, Subscription>();
+        
+        
+        
+        CreateMap<ClubUser, ClubUserDto>()
+            .ForMember(dest => dest.ClubName, opt => opt.MapFrom(src => src.Club.Name))
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+            .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email));
     }
 }
