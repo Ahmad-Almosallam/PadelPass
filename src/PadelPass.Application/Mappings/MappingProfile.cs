@@ -34,11 +34,11 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PlanPrice, opt => opt.MapFrom(src => src.Plan.Price))
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => string.Empty)); // Will be populated by service
         CreateMap<CreateSubscriptionDto, Subscription>()
-            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => DateTime.UtcNow))
-            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => DateTime.UtcNow.AddMonths(1))) // Default 1 month, will be updated based on plan
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => DateTimeOffset.UtcNow))
+            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => DateTimeOffset.UtcNow.AddMonths(1))) // Default 1 month, will be updated based on plan
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true))
             .ForMember(dest => dest.IsPaused, opt => opt.MapFrom(src => false))
-            .ForMember(dest => dest.PauseDate, opt => opt.MapFrom(src => (DateTime?)null))
+            .ForMember(dest => dest.PauseDate, opt => opt.MapFrom(src => (DateTimeOffset?)null))
             .ForMember(dest => dest.RemainingDays, opt => opt.MapFrom(src => (int?)null));
         CreateMap<UpdateSubscriptionDto, Subscription>();
         

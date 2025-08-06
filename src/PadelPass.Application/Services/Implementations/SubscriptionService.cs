@@ -205,7 +205,7 @@ public class SubscriptionService
             subscription.UserId = userId;
 
             // Set start and end dates based on plan duration
-            subscription.StartDate = DateTime.UtcNow;
+            subscription.StartDate = DateTimeOffset.UtcNow;
             subscription.EndDate = subscription.StartDate.AddMonths(plan.DurationInMonths);
 
             _repository.Insert(subscription);
@@ -379,17 +379,17 @@ public class SubscriptionService
             }
 
             // Calculate new end date based on additional months
-            DateTime newEndDate;
+            DateTimeOffset newEndDate;
 
             if (subscription.IsPaused)
             {
                 // For paused subscriptions, we add the months to the calculated end date
                 int daysRemaining = subscription.RemainingDays ?? 0;
-                newEndDate = DateTime.UtcNow.AddDays(daysRemaining)
+                newEndDate = DateTimeOffset.UtcNow.AddDays(daysRemaining)
                     .AddMonths(dto.AdditionalMonths);
 
                 // Update the remaining days to include the extension
-                subscription.RemainingDays = (int)(newEndDate - DateTime.UtcNow).TotalDays;
+                subscription.RemainingDays = (int)(newEndDate - DateTimeOffset.UtcNow).TotalDays;
             }
             else
             {
@@ -453,7 +453,7 @@ public class SubscriptionService
             }
 
             // Calculate remaining days
-            var now = DateTime.UtcNow;
+            var now = DateTimeOffset.UtcNow;
             if (now > subscription.EndDate)
             {
                 return ApiResponse<SubscriptionDto>.Fail("Subscription has already expired");
@@ -527,7 +527,7 @@ public class SubscriptionService
             }
 
             // Calculate new end date
-            var now = DateTime.UtcNow;
+            var now = DateTimeOffset.UtcNow;
             var newEndDate = now.AddDays(remainingDays);
 
             // Update subscription

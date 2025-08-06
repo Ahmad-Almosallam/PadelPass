@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PadelPass.Application.DTOs.Authentication;
 using PadelPass.Core.Common;
+using PadelPass.Core.Common.Enums;
 using PadelPass.Core.Constants;
 using PadelPass.Core.Entities;
 using PadelPass.Core.Repositories;
@@ -61,6 +62,7 @@ public class AuthService
                 UserName = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 FullName = model.FullName,
+                UserType = UserType.EndUser,
                 SecurityStamp = Guid.NewGuid()
                     .ToString()
             };
@@ -135,7 +137,7 @@ public class AuthService
             }
 
             // Check if token is expired
-            if (refreshToken.ExpiryDate < DateTime.UtcNow)
+            if (refreshToken.ExpiryDate < DateTimeOffset.UtcNow)
             {
                 return ApiResponse<AuthResponseDto>.Fail("Refresh token has expired");
             }
@@ -342,7 +344,7 @@ public class AuthService
             Token = refreshToken,
             JwtId = authClaims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti)
                 ?.Value,
-            ExpiryDate = DateTime.UtcNow.AddDays(7),
+            ExpiryDate = DateTimeOffset.UtcNow.AddDays(7),
             IsRevoked = false,
             IsUsed = false
         };
@@ -358,7 +360,7 @@ public class AuthService
             FullName = user.FullName,
             AccessToken = token,
             RefreshToken = refreshToken,
-            ExpiresAt = DateTime.UtcNow.AddMinutes(30),
+            ExpiresAt = DateTimeOffset.UtcNow.AddMinutes(30),
             Roles = userRoles.ToList()
         });
     }

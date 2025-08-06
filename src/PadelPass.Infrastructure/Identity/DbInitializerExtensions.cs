@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PadelPass.Core.Common.Enums;
 using PadelPass.Core.Constants;
 using PadelPass.Core.Entities;
 
@@ -61,6 +62,7 @@ public static class DbInitializerExtensions
                 PhoneNumber = "123456789",
                 FullName = "Super Admin",
                 EmailConfirmed = true,
+                UserType = UserType.Admin,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 

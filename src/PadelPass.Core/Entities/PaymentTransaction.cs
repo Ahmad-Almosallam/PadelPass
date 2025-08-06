@@ -17,5 +17,5 @@ public class PaymentTransaction : BaseEntity
 
     [Required] [StringLength(20)] public string Status { get; set; }
 
-    [Required] public DateTime TransactionDate { get; set; }
+    [Required] public DateTimeOffset TransactionDate { get; set; }
 }

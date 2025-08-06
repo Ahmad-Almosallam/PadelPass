@@ -11,10 +11,10 @@ public abstract class BaseEntity
     public string? CreatedBy { get; set; }
 
     [Required]
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
     [StringLength(50)]
     public string? UpdatedBy { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
 }

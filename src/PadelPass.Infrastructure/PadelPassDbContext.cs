@@ -14,7 +14,7 @@ public class PadelPassDbContext : IdentityDbContext<ApplicationUser>
         ICurrentUserService currentUserService)
         : base(options)
     {
-        _currentUserService = currentUserService;
+        _currentUserService = currentUserService;   
     }
 
     public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; }
@@ -24,11 +24,15 @@ public class PadelPassDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<NonPeakSlot> NonPeakSlots { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<ClubUser> ClubUsers { get; set; }
+    public DbSet<DiscountCode> DiscountCodes { get; set; }
+    public DbSet<CheckIn> CheckIns { get; set; }
+    
 
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
-        var now = DateTime.UtcNow;
-        var userId = _currentUserService.UserId ?? string.Empty;// resolve current user
+        var now = DateTimeOffset.UtcNow; // Use DateTimeOffset.UtcNow
+        var userId = _currentUserService.UserId ?? string.Empty;
+    
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             switch (entry.State)

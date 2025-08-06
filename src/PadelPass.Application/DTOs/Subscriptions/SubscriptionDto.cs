@@ -8,12 +8,12 @@ public class SubscriptionDto
     public int PlanId { get; set; }
     public string PlanName { get; set; }
     public decimal PlanPrice { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset EndDate { get; set; }
     public bool IsActive { get; set; }
     public bool IsPaused { get; set; }
-    public DateTime? PauseDate { get; set; }
+    public DateTimeOffset? PauseDate { get; set; }
     public int? RemainingDays { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
 }

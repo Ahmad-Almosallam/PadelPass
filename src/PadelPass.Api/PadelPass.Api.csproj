@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PadelPass.Application\PadelPass.Application.csproj" />
+    <ProjectReference Include="..\PadelPass.Core\PadelPass.Core.csproj" />
     <ProjectReference Include="..\PadelPass.Infrastructure\PadelPass.Infrastructure.csproj" />
   </ItemGroup>
 

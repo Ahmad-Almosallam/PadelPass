@@ -336,7 +336,7 @@ public class ClubUserService
             // Get subscriptions for filtering
             var subscriptions = await _subscriptionRepository.AsQueryable(false)
                 .Include(s => s.Plan)
-                .Where(s => s.IsActive && !s.IsPaused && s.EndDate > DateTime.UtcNow)
+                .Where(s => s.IsActive && !s.IsPaused && s.EndDate > DateTimeOffset.UtcNow)
                 .ToListAsync();
 
             var subscriptionsByUserId = subscriptions.GroupBy(s => s.UserId)
@@ -435,7 +435,7 @@ public class ClubUserService
             // Get active subscription if any
             var subscription = await _subscriptionRepository.AsQueryable(false)
                 .Include(s => s.Plan)
-                .Where(s => s.UserId == userId && s.IsActive && !s.IsPaused && s.EndDate > DateTime.UtcNow)
+                .Where(s => s.UserId == userId && s.IsActive && !s.IsPaused && s.EndDate > DateTimeOffset.UtcNow)
                 .OrderByDescending(s => s.EndDate)
                 .FirstOrDefaultAsync();
 
@@ -512,7 +512,7 @@ public class ClubUserService
                 .AnyAsync(s => s.UserId == user.Id && 
                              s.IsActive && 
                              !s.IsPaused && 
-                             s.EndDate > DateTime.UtcNow);
+                             s.EndDate > DateTimeOffset.UtcNow);
 
             // Return simple boolean result
             return ApiResponse<bool>.Ok(hasActiveSubscription);

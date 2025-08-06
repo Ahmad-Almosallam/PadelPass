@@ -11,6 +11,10 @@ public class Club : BaseEntity
     [Range(-90, 90)] public double? Latitude { get; set; }
 
     [Range(-180, 180)] public double? Longitude { get; set; }
+    
+    // Add timezone information
+    [Required] [StringLength(100)] 
+    public string TimeZoneId { get; set; } = "Asia/Riyadh"; // Default to Saudi Arabia timezone
 
     public ICollection<NonPeakSlot> NonPeakSlots { get; set; } = new List<NonPeakSlot>();
 }

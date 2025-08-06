@@ -9,5 +9,5 @@ public class UserSearchDto
     public string PhoneNumber { get; set; }
     public bool HasActiveSubscription { get; set; }
     public string SubscriptionPlanName { get; set; }
-    public DateTime? SubscriptionEndDate { get; set; }
+    public DateTimeOffset? SubscriptionEndDate { get; set; }
 }

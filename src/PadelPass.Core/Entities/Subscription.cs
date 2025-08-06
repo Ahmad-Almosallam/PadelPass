@@ -11,16 +11,15 @@ public class Subscription : BaseEntity
 
     [ForeignKey(nameof(PlanId))] public SubscriptionPlan Plan { get; set; }
 
-    [Required] public DateTime StartDate { get; set; }
+    [Required] public DateTimeOffset  StartDate { get; set; }
 
-    [Required] public DateTime EndDate { get; set; }
+    [Required] public DateTimeOffset  EndDate { get; set; }
 
     public bool IsActive { get; set; } = true;
     
-    // New properties for pause functionality
     public bool IsPaused { get; set; } = false;
     
-    public DateTime? PauseDate { get; set; }
+    public DateTimeOffset? PauseDate { get; set; }
     
     public int? RemainingDays { get; set; }
 }

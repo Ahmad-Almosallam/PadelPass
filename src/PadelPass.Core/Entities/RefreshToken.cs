@@ -11,7 +11,7 @@ public class RefreshToken : BaseEntity
     public string Token { get; set; }
     
     [Required]
-    public DateTime ExpiryDate { get; set; }
+    public DateTimeOffset ExpiryDate { get; set; }
     
     public bool IsRevoked { get; set; }
     
