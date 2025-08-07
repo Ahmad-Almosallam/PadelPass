@@ -4,13 +4,11 @@ namespace PadelPass.Application.DTOs.Clubs;
 
 public class CreateClubDto
 {
-    [Required]
-    [StringLength(200, MinimumLength = 3)]
     public string Name { get; set; }
 
-    [StringLength(500)] public string Address { get; set; }
+    public string Address { get; set; }
 
-    [Range(-90, 90)] public double? Latitude { get; set; }
+    public double? Latitude { get; set; }
 
-    [Range(-180, 180)] public double? Longitude { get; set; }
+    public double? Longitude { get; set; }
 }
