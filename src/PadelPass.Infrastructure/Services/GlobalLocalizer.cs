@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Localization;
-using PadelPass.Core.Localization;
+using PadelPass.Core;
 using PadelPass.Core.Services;
 
 namespace PadelPass.Infrastructure.Services;

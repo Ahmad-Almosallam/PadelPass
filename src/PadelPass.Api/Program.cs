@@ -1,10 +1,11 @@
-using System.ComponentModel;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using PadelPass.Api.Filters;
 using PadelPass.Application;
+using PadelPass.Core;
 using PadelPass.Core.Common;
 using PadelPass.Core.Constants;
 using PadelPass.Infrastructure;
@@ -70,9 +71,10 @@ builder.Services.AddAuthorization(options =>
 // Infrastructure & Application Layers
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddCore();
 builder.Services.AddHttpContextAccessor();
 
-
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = LocalizationSettings.SupportedCultures;
@@ -80,16 +82,39 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
     options.RequestCultureProviders.Insert(0, new AcceptLanguageHeaderRequestCultureProvider());
-    
 });
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<AcceptLanguageHeader>();
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
 
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
-app.UseRequestLocalization();
 
 if (app.Environment.IsDevelopment())
 {
@@ -99,6 +124,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+app.UseRequestLocalization();
 app.UseAuthorization();
 app.UseResponseCompression();
 app.MapHealthChecks("/health");
