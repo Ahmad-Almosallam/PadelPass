@@ -1,22 +1,30 @@
 ﻿using FluentValidation;
 using PadelPass.Application.DTOs.SubscriptionPlans;
+using PadelPass.Core.Services;
+using PadelPass.Core.Shared;
 
-namespace PadelPass.Application.Validators.SubscriptionPlans;
-
-public class UpdateSubscriptionPlanDtoValidator : AbstractValidator<UpdateSubscriptionPlanDto>
+namespace PadelPass.Application.Validators.SubscriptionPlans
 {
-    public UpdateSubscriptionPlanDtoValidator()
+    public class UpdateSubscriptionPlanDtoValidator : AbstractValidator<UpdateSubscriptionPlanDto>
     {
-        RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Name is required")
-            .MaximumLength(100).WithMessage("Name cannot exceed 100 characters");
+        private readonly IGlobalLocalizer _localizer;
 
-        RuleFor(x => x.DurationInMonths)
-            .NotEmpty().WithMessage("Duration is required")
-            .InclusiveBetween(1, 36).WithMessage("Duration must be between 1 and 36 months");
+        public UpdateSubscriptionPlanDtoValidator(IGlobalLocalizer localizer)
+        {
+            _localizer = localizer;
 
-        RuleFor(x => x.Price)
-            .NotEmpty().WithMessage("Price is required")
-            .GreaterThan(0).WithMessage("Price must be greater than 0");
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage(_localizer["NameRequired"])
+                .MaximumLength(100).WithMessage(_localizer["NameMaxLength", 100]);
+
+            RuleFor(x => x.DurationInMonths)
+                .NotEmpty().WithMessage(_localizer["DurationRequired"])
+                .InclusiveBetween(1, 36)
+                .WithMessage(_localizer["DurationRange"]);
+
+            RuleFor(x => x.Price)
+                .NotEmpty().WithMessage(_localizer["PriceRequired"])
+                .GreaterThan(0).WithMessage(_localizer["PriceGreaterThanZero"]);
+        }
     }
 }

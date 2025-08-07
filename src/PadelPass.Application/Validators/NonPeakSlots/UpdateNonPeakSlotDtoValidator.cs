@@ -1,16 +1,23 @@
 ﻿using FluentValidation;
 using PadelPass.Application.DTOs.NonPeakSlots;
+using PadelPass.Core.Services;
+using PadelPass.Core.Shared;
 
-namespace PadelPass.Application.Validators.NonPeakSlots;
-
-public class UpdateNonPeakSlotDtoValidator : AbstractValidator<UpdateNonPeakSlotDto>
+namespace PadelPass.Application.Validators.NonPeakSlots
 {
-    public UpdateNonPeakSlotDtoValidator()
+    public class UpdateNonPeakSlotDtoValidator : AbstractValidator<UpdateNonPeakSlotDto>
     {
-        RuleFor(x => x.DayOfWeek)
-            .IsInEnum().WithMessage("Invalid day of week");
+        private readonly IGlobalLocalizer _localizer;
 
-        RuleFor(x => x.EndTime)
-            .GreaterThan(x => x.StartTime).WithMessage("End time must be after start time");
+        public UpdateNonPeakSlotDtoValidator(IGlobalLocalizer localizer)
+        {
+            _localizer = localizer;
+
+            RuleFor(x => x.DayOfWeek)
+                .IsInEnum().WithMessage(_localizer["InvalidDayOfWeek"]);
+
+            RuleFor(x => x.EndTime)
+                .GreaterThan(x => x.StartTime).WithMessage(_localizer["EndTimeAfterStartTime"]);
+        }
     }
 }
