@@ -16,17 +16,20 @@ public class ClubService
     private readonly ICurrentUserService _currentUserService;
     private readonly IMapper _mapper;
     private readonly ILogger<ClubService> _logger;
+    private readonly IGlobalLocalizer _localizer;
 
     public ClubService(
         IGenericRepository<Club> repository,
         ICurrentUserService currentUserService,
         IMapper mapper,
-        ILogger<ClubService> logger)
+        ILogger<ClubService> logger,
+        IGlobalLocalizer localizer)
     {
         _repository = repository;
         _currentUserService = currentUserService;
         _mapper = mapper;
         _logger = logger;
+        _localizer = localizer;
     }
 
     public async Task<ApiResponse<ClubDto>> GetByIdAsync(int id)
@@ -36,7 +39,7 @@ public class ClubService
             var club = await _repository.GetByIdAsync(id);
             if (club == null)
             {
-                return ApiResponse<ClubDto>.Fail($"Club with ID {id} not found");
+                return ApiResponse<ClubDto>.Fail(_localizer["ClubNotFound"]);
             }
 
             return ApiResponse<ClubDto>.Ok(_mapper.Map<ClubDto>(club));
@@ -44,7 +47,7 @@ public class ClubService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting club with ID {ClubId}", id);
-            return ApiResponse<ClubDto>.Fail("An error occurred while retrieving the club");
+            return ApiResponse<ClubDto>.Fail(_localizer["ErrorOccurredWhileRetrieving", _localizer["Club"]]);
         }
     }
 
@@ -69,7 +72,7 @@ public class ClubService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting paginated clubs");
-            return ApiResponse<PaginatedList<ClubDto>>.Fail("An error occurred while retrieving clubs");
+            return ApiResponse<PaginatedList<ClubDto>>.Fail(_localizer["ErrorOccurredWhileRetrieving", "clubs"]);
         }
     }
 
@@ -84,12 +87,12 @@ public class ClubService
             
             return ApiResponse<ClubDto>.Ok(
                 _mapper.Map<ClubDto>(club), 
-                "Club created successfully");
+                _localizer["ClubCreatedSuccessfully"]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating club");
-            return ApiResponse<ClubDto>.Fail("An error occurred while creating the club");
+            return ApiResponse<ClubDto>.Fail(_localizer["ErrorOccurredWhileCreating", _localizer["Club"]]);
         }
     }
 
@@ -100,7 +103,7 @@ public class ClubService
             var club = await _repository.GetByIdAsync(id);
             if (club == null)
             {
-                return ApiResponse<ClubDto>.Fail($"Club with ID {id} not found");
+                return ApiResponse<ClubDto>.Fail(_localizer["ClubNotFound"]);
             }
 
             _mapper.Map(dto, club);
@@ -110,12 +113,12 @@ public class ClubService
             
             return ApiResponse<ClubDto>.Ok(
                 _mapper.Map<ClubDto>(club), 
-                "Club updated successfully");
+                _localizer["ClubUpdatedSuccessfully"]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error updating club with ID {ClubId}", id);
-            return ApiResponse<ClubDto>.Fail("An error occurred while updating the club");
+            return ApiResponse<ClubDto>.Fail(_localizer["ErrorOccurredWhileUpdating", _localizer["Club"]]);
         }
     }
 
@@ -126,18 +129,18 @@ public class ClubService
             var club = await _repository.GetByIdAsync(id);
             if (club == null)
             {
-                return ApiResponse<bool>.Fail($"Club with ID {id} not found");
+                return ApiResponse<bool>.Fail(_localizer["ClubNotFound"]);
             }
 
             _repository.Delete(club);
             await _repository.SaveChangesAsync();
             
-            return ApiResponse<bool>.Ok(true, "Club deleted successfully");
+            return ApiResponse<bool>.Ok(true, _localizer["ClubDeletedSuccessfully"]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error deleting club with ID {ClubId}", id);
-            return ApiResponse<bool>.Fail("An error occurred while deleting the club");
+            return ApiResponse<bool>.Fail(_localizer["ErrorOccurredWhileDeleting", _localizer["Club"]]);
         }
     }
 }

@@ -8,136 +8,150 @@ using PadelPass.Core.Repositories;
 using PadelPass.Core.Services;
 using PadelPass.Core.Shared;
 
-namespace PadelPass.Application.Services.Implementations;
-
-public class SubscriptionPlanService 
+namespace PadelPass.Application.Services.Implementations
 {
-    private readonly IGenericRepository<SubscriptionPlan> _repository;
-    private readonly ICurrentUserService _currentUserService;
-    private readonly IMapper _mapper;
-    private readonly ILogger<SubscriptionPlanService> _logger;
-
-    public SubscriptionPlanService(
-        IGenericRepository<SubscriptionPlan> repository,
-        ICurrentUserService currentUserService,
-        IMapper mapper,
-        ILogger<SubscriptionPlanService> logger)
+    public class SubscriptionPlanService
     {
-        _repository = repository;
-        _currentUserService = currentUserService;
-        _mapper = mapper;
-        _logger = logger;
-    }
+        private readonly IGenericRepository<SubscriptionPlan> _repository;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMapper _mapper;
+        private readonly ILogger<SubscriptionPlanService> _logger;
+        private readonly IGlobalLocalizer _localizer;
 
-    public async Task<ApiResponse<SubscriptionPlanDto>> GetByIdAsync(int id)
-    {
-        try
+        public SubscriptionPlanService(
+            IGenericRepository<SubscriptionPlan> repository,
+            ICurrentUserService currentUserService,
+            IMapper mapper,
+            IGlobalLocalizer localizer,
+            ILogger<SubscriptionPlanService> logger)
         {
-            var plan = await _repository.GetByIdAsync(id);
-            if (plan == null)
+            _repository = repository;
+            _currentUserService = currentUserService;
+            _mapper = mapper;
+            _localizer = localizer;
+            _logger = logger;
+        }
+
+        public async Task<ApiResponse<SubscriptionPlanDto>> GetByIdAsync(int id)
+        {
+            try
             {
-                return ApiResponse<SubscriptionPlanDto>.Fail($"Subscription plan with ID {id} not found");
+                var plan = await _repository.GetByIdAsync(id);
+                if (plan == null)
+                {
+                    return ApiResponse<SubscriptionPlanDto>
+                        .Fail(_localizer["SubscriptionPlanNotFound"]);
+                }
+
+                var dto = _mapper.Map<SubscriptionPlanDto>(plan);
+                return ApiResponse<SubscriptionPlanDto>.Ok(dto);
             }
-
-            return ApiResponse<SubscriptionPlanDto>.Ok(_mapper.Map<SubscriptionPlanDto>(plan));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting subscription plan with ID {PlanId}", id);
-            return ApiResponse<SubscriptionPlanDto>.Fail("An error occurred while retrieving the subscription plan");
-        }
-    }
-
-    public async Task<ApiResponse<PaginatedList<SubscriptionPlanDto>>> GetPaginatedAsync(
-        int pageNumber, int pageSize, string orderBy = "Name", string orderType = "ASC")
-    {
-        try
-        {
-            var query = _repository.AsQueryable(false);
-            
-            var paginatedResult = await _repository.GetPaginatedListAsync(
-                query, pageNumber, pageSize, orderBy, orderType);
-            
-            var mappedResult = new PaginatedList<SubscriptionPlanDto>(
-                _mapper.Map<List<SubscriptionPlanDto>>(paginatedResult.Items),
-                paginatedResult.TotalCount,
-                paginatedResult.PageNumber,
-                pageSize);
-            
-            return ApiResponse<PaginatedList<SubscriptionPlanDto>>.Ok(mappedResult);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting paginated subscription plans");
-            return ApiResponse<PaginatedList<SubscriptionPlanDto>>.Fail("An error occurred while retrieving subscription plans");
-        }
-    }
-
-    public async Task<ApiResponse<SubscriptionPlanDto>> CreateAsync(CreateSubscriptionPlanDto dto)
-    {
-        try
-        {
-            var plan = _mapper.Map<SubscriptionPlan>(dto);
-            
-            _repository.Insert(plan);
-            await _repository.SaveChangesAsync();
-            
-            return ApiResponse<SubscriptionPlanDto>.Ok(
-                _mapper.Map<SubscriptionPlanDto>(plan), 
-                "Subscription plan created successfully");
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error creating subscription plan");
-            return ApiResponse<SubscriptionPlanDto>.Fail("An error occurred while creating the subscription plan");
-        }
-    }
-
-    public async Task<ApiResponse<SubscriptionPlanDto>> UpdateAsync(int id, UpdateSubscriptionPlanDto dto)
-    {
-        try
-        {
-            var plan = await _repository.GetByIdAsync(id);
-            if (plan == null)
+            catch (Exception ex)
             {
-                return ApiResponse<SubscriptionPlanDto>.Fail($"Subscription plan with ID {id} not found");
+                _logger.LogError(ex, "Error getting subscription plan with ID {PlanId}", id);
+                return ApiResponse<SubscriptionPlanDto>
+                    .Fail(_localizer["ErrorOccurredWhileRetrieving", _localizer["SubscriptionPlan"]]);
             }
-
-            _mapper.Map(dto, plan);
-            
-            _repository.Update(plan);
-            await _repository.SaveChangesAsync();
-            
-            return ApiResponse<SubscriptionPlanDto>.Ok(
-                _mapper.Map<SubscriptionPlanDto>(plan), 
-                "Subscription plan updated successfully");
         }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error updating subscription plan with ID {PlanId}", id);
-            return ApiResponse<SubscriptionPlanDto>.Fail("An error occurred while updating the subscription plan");
-        }
-    }
 
-    public async Task<ApiResponse<bool>> DeleteAsync(int id)
-    {
-        try
+        public async Task<ApiResponse<PaginatedList<SubscriptionPlanDto>>> GetPaginatedAsync(
+            int pageNumber, int pageSize, string orderBy = "Name", string orderType = "ASC")
         {
-            var plan = await _repository.GetByIdAsync(id);
-            if (plan == null)
+            try
             {
-                return ApiResponse<bool>.Fail($"Subscription plan with ID {id} not found");
-            }
+                var query = _repository.AsQueryable(false);
+                var paginatedResult = await _repository.GetPaginatedListAsync(
+                    query, pageNumber, pageSize, orderBy, orderType);
 
-            _repository.Delete(plan);
-            await _repository.SaveChangesAsync();
-            
-            return ApiResponse<bool>.Ok(true, "Subscription plan deleted successfully");
+                var mappedResult = new PaginatedList<SubscriptionPlanDto>(
+                    _mapper.Map<List<SubscriptionPlanDto>>(paginatedResult.Items),
+                    paginatedResult.TotalCount,
+                    paginatedResult.PageNumber,
+                    pageSize);
+
+                return ApiResponse<PaginatedList<SubscriptionPlanDto>>.Ok(mappedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting paginated subscription plans");
+                return ApiResponse<PaginatedList<SubscriptionPlanDto>>
+                    .Fail(_localizer["ErrorOccurredWhileRetrieving", _localizer["SubscriptionPlan"]]);
+            }
         }
-        catch (Exception ex)
+
+        public async Task<ApiResponse<SubscriptionPlanDto>> CreateAsync(CreateSubscriptionPlanDto dto)
         {
-            _logger.LogError(ex, "Error deleting subscription plan with ID {PlanId}", id);
-            return ApiResponse<bool>.Fail("An error occurred while deleting the subscription plan");
+            try
+            {
+                var plan = _mapper.Map<SubscriptionPlan>(dto);
+                _repository.Insert(plan);
+                await _repository.SaveChangesAsync();
+
+                return ApiResponse<SubscriptionPlanDto>.Ok(
+                    _mapper.Map<SubscriptionPlanDto>(plan),
+                    _localizer["SubscriptionPlanCreatedSuccessfully"]
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating subscription plan");
+                return ApiResponse<SubscriptionPlanDto>
+                    .Fail(_localizer["ErrorOccurredWhileCreating", _localizer["SubscriptionPlan"]]);
+            }
+        }
+
+        public async Task<ApiResponse<SubscriptionPlanDto>> UpdateAsync(int id, UpdateSubscriptionPlanDto dto)
+        {
+            try
+            {
+                var plan = await _repository.GetByIdAsync(id);
+                if (plan == null)
+                {
+                    return ApiResponse<SubscriptionPlanDto>
+                        .Fail(_localizer["SubscriptionPlanNotFound"]);
+                }
+
+                _mapper.Map(dto, plan);
+                _repository.Update(plan);
+                await _repository.SaveChangesAsync();
+
+                return ApiResponse<SubscriptionPlanDto>.Ok(
+                    _mapper.Map<SubscriptionPlanDto>(plan),
+                    _localizer["SubscriptionPlanUpdatedSuccessfully"]
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating subscription plan with ID {PlanId}", id);
+                return ApiResponse<SubscriptionPlanDto>
+                    .Fail(_localizer["ErrorOccurredWhileUpdating", _localizer["SubscriptionPlan"]]);
+            }
+        }
+
+        public async Task<ApiResponse<bool>> DeleteAsync(int id)
+        {
+            try
+            {
+                var plan = await _repository.GetByIdAsync(id);
+                if (plan == null)
+                {
+                    return ApiResponse<bool>.Fail(_localizer["SubscriptionPlanNotFound"]);
+                }
+
+                _repository.Delete(plan);
+                await _repository.SaveChangesAsync();
+
+                return ApiResponse<bool>.Ok(
+                    true,
+                    _localizer["SubscriptionPlanDeletedSuccessfully"]
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting subscription plan with ID {PlanId}", id);
+                return ApiResponse<bool>
+                    .Fail(_localizer["ErrorOccurredWhileDeleting", _localizer["SubscriptionPlan"]]);
+            }
         }
     }
 }

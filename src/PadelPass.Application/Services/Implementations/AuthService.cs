@@ -14,6 +14,7 @@ using PadelPass.Core.Common.Enums;
 using PadelPass.Core.Constants;
 using PadelPass.Core.Entities;
 using PadelPass.Core.Repositories;
+using PadelPass.Core.Services;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace PadelPass.Application.Services.Implementations;
@@ -26,6 +27,7 @@ public class AuthService
     private readonly IMapper _mapper;
     private readonly JwtSettings _jwtSettings;
     private readonly ILogger<AuthService> _logger;
+    private readonly IGlobalLocalizer _localizer;
 
     public AuthService(
         UserManager<ApplicationUser> userManager,
@@ -33,7 +35,8 @@ public class AuthService
         IGenericRepository<RefreshToken> refreshTokenRepository,
         IMapper mapper,
         IOptions<JwtSettings> jwtSettings,
-        ILogger<AuthService> logger)
+        ILogger<AuthService> logger,
+        IGlobalLocalizer localizer)
     {
         _userManager = userManager;
         _roleManager = roleManager;
@@ -41,6 +44,7 @@ public class AuthService
         _mapper = mapper;
         _jwtSettings = jwtSettings.Value;
         _logger = logger;
+        _localizer = localizer;
     }
 
     public async Task<ApiResponse<AuthResponseDto>> RegisterAsync(
@@ -52,7 +56,7 @@ public class AuthService
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
             {
-                return ApiResponse<AuthResponseDto>.Fail("User with this email already exists");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["UserWithEmailExists"]);
             }
 
             // Create user
@@ -89,7 +93,7 @@ public class AuthService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error during user registration");
-            return ApiResponse<AuthResponseDto>.Fail("An error occurred during user registration");
+            return ApiResponse<AuthResponseDto>.Fail(_localizer["ErrorOccurredDuringRegistration"]);
         }
     }
 
@@ -102,14 +106,14 @@ public class AuthService
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return ApiResponse<AuthResponseDto>.Fail("Invalid email or password");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["InvalidEmailOrPassword"]);
             }
 
             // Verify password
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, model.Password);
             if (!isPasswordValid)
             {
-                return ApiResponse<AuthResponseDto>.Fail("Invalid email or password");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["InvalidEmailOrPassword"]);
             }
 
             // Generate JWT token
@@ -118,7 +122,7 @@ public class AuthService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error during user login");
-            return ApiResponse<AuthResponseDto>.Fail("An error occurred during login");
+            return ApiResponse<AuthResponseDto>.Fail(_localizer["ErrorOccurredDuringLogin"]);
         }
     }
 
@@ -133,20 +137,20 @@ public class AuthService
 
             if (refreshToken == null)
             {
-                return ApiResponse<AuthResponseDto>.Fail("Invalid refresh token");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["InvalidRefreshToken"]);
             }
 
             // Check if token is expired
             if (refreshToken.ExpiryDate < DateTimeOffset.UtcNow)
             {
-                return ApiResponse<AuthResponseDto>.Fail("Refresh token has expired");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["RefreshTokenExpired"]);
             }
 
             // Get user
             var user = await _userManager.FindByIdAsync(refreshToken.UserId);
             if (user == null)
             {
-                return ApiResponse<AuthResponseDto>.Fail("User not found");
+                return ApiResponse<AuthResponseDto>.Fail(_localizer["UserNotFound"]);
             }
 
             // Mark current token as used
@@ -160,7 +164,7 @@ public class AuthService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error refreshing token");
-            return ApiResponse<AuthResponseDto>.Fail("An error occurred while refreshing the token");
+            return ApiResponse<AuthResponseDto>.Fail(_localizer["ErrorOccurredWhileRefreshingToken"]);
         }
     }
 
@@ -173,7 +177,7 @@ public class AuthService
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
             {
-                return ApiResponse<UserDto>.Fail("User with this email already exists");
+                return ApiResponse<UserDto>.Fail(_localizer["UserWithEmailExists"]);
             }
 
             // Create user
@@ -214,12 +218,12 @@ public class AuthService
                 Roles = new List<string> { AppRoles.Admin }
             };
 
-            return ApiResponse<UserDto>.Ok(userDto, "Admin user created successfully");
+            return ApiResponse<UserDto>.Ok(userDto, _localizer["AdminUserCreatedSuccessfully"]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating admin user");
-            return ApiResponse<UserDto>.Fail("An error occurred while creating the admin user");
+            return ApiResponse<UserDto>.Fail(_localizer["ErrorOccurredWhileCreatingAdmin"]);
         }
     }
 
@@ -231,7 +235,7 @@ public class AuthService
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return ApiResponse<UserDto>.Fail($"User with ID {userId} not found");
+                return ApiResponse<UserDto>.Fail(_localizer["UserNotFound"]);
             }
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -250,7 +254,7 @@ public class AuthService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting user with ID {UserId}", userId);
-            return ApiResponse<UserDto>.Fail("An error occurred while retrieving the user");
+            return ApiResponse<UserDto>.Fail(_localizer["ErrorOccurredWhileRetrieving", _localizer["User"]]);
         }
     }
 
@@ -280,7 +284,7 @@ public class AuthService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error getting all users");
-            return ApiResponse<List<UserDto>>.Fail("An error occurred while retrieving users");
+            return ApiResponse<List<UserDto>>.Fail(_localizer["ErrorOccurredWhileRetrieving", "users"]);
         }
     }
 
@@ -301,12 +305,12 @@ public class AuthService
             }
 
             await _refreshTokenRepository.SaveChangesAsync();
-            return ApiResponse<bool>.Ok(true, "Logout successful");
+            return ApiResponse<bool>.Ok(true, _localizer["LogoutSuccessful"]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error during logout for user {UserId}", userId);
-            return ApiResponse<bool>.Fail("An error occurred during logout");
+            return ApiResponse<bool>.Fail(_localizer["ErrorOccurredDuringLogout"]);
         }
     }
 

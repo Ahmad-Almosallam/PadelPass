@@ -21,6 +21,7 @@ public class CheckInService
     private readonly ITimeZoneService _timeZoneService;
     private readonly IMapper _mapper;
     private readonly ILogger<CheckInService> _logger;
+    private readonly IGlobalLocalizer _localizer;
 
     public CheckInService(
         IGenericRepository<CheckIn> checkInRepository,
@@ -30,7 +31,8 @@ public class CheckInService
         ICurrentUserService currentUserService,
         ITimeZoneService timeZoneService,
         IMapper mapper,
-        ILogger<CheckInService> logger)
+        ILogger<CheckInService> logger,
+        IGlobalLocalizer localizer)
     {
         _checkInRepository = checkInRepository;
         _clubRepository = clubRepository;
@@ -40,6 +42,7 @@ public class CheckInService
         _timeZoneService = timeZoneService;
         _mapper = mapper;
         _logger = logger;
+        _localizer = localizer;
     }
 
     public async Task<ApiResponse<CheckInDto>> CreateCheckInAsync(CreateCheckInDto dto)
@@ -52,20 +55,20 @@ public class CheckInService
 
             if (user == null)
             {
-                return ApiResponse<CheckInDto>.Fail($"User with phone number {dto.UserPhoneNumber} not found");
+                return ApiResponse<CheckInDto>.Fail(_localizer["NoUserFoundWithPhoneNumber", dto.UserPhoneNumber]);
             }
 
             // Verify user has User role
             if (!await _userManager.IsInRoleAsync(user, AppRoles.User))
             {
-                return ApiResponse<CheckInDto>.Fail("Invalid user type");
+                return ApiResponse<CheckInDto>.Fail(_localizer["InvalidUserType"]);
             }
 
             // Get club with timezone info
             var club = await _clubRepository.GetByIdAsync(dto.ClubId);
             if (club == null)
             {
-                return ApiResponse<CheckInDto>.Fail($"Club with ID {dto.ClubId} not found");
+                return ApiResponse<CheckInDto>.Fail(_localizer["ClubNotFound"]);
             }
 
             // Convert check-in time to UTC if provided, or use current time
@@ -86,7 +89,7 @@ public class CheckInService
 
             if (!hasActiveSubscription)
             {
-                return ApiResponse<CheckInDto>.Fail("User does not have an active subscription");
+                return ApiResponse<CheckInDto>.Fail(_localizer["UserDoesNotHaveActiveSubscription"]);
             }
 
             // Check if already checked in today (based on club's timezone)
@@ -109,7 +112,7 @@ public class CheckInService
                         _timeZoneService.ConvertToClubTime(existingCheckIn.CheckInDateTime, club.TimeZoneId);
                     if (existingClubTime.Date == clubDate)
                     {
-                        return ApiResponse<CheckInDto>.Fail("User has already checked in to this club today");
+                        return ApiResponse<CheckInDto>.Fail(_localizer["UserAlreadyCheckedInToday"]);
                     }
                 }
             }
@@ -125,7 +128,7 @@ public class CheckInService
                 var isWithinNonPeak = _timeZoneService.IsWithinNonPeakHours(clubTime, nonPeakSlots);
                 if (!isWithinNonPeak)
                 {
-                    return ApiResponse<CheckInDto>.Fail("Check-in is only allowed during non-peak hours");
+                    return ApiResponse<CheckInDto>.Fail(_localizer["CheckInOnlyDuringNonPeakHours"]);
                 }
             }
 
@@ -152,12 +155,12 @@ public class CheckInService
             resultDto.ClubName = club.Name;
             resultDto.CheckInDateTime = _timeZoneService.ConvertToClubTime(checkIn.CheckInDateTime, club.TimeZoneId);
 
-            return ApiResponse<CheckInDto>.Ok(resultDto, "Check-in successful");
+            return ApiResponse<CheckInDto>.Ok(resultDto, _localizer["CheckInSuccessful", user.FullName]);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating check-in for user {PhoneNumber}", dto.UserPhoneNumber);
-            return ApiResponse<CheckInDto>.Fail("An error occurred while processing the check-in");
+            return ApiResponse<CheckInDto>.Fail(_localizer["ErrorOccurredWhileProcessingCheckIn"]);
         }
     }
 }
