@@ -1,8 +1,10 @@
 ﻿using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PadelPass.Core.Common;
+using PadelPass.Core.Services;
 
 namespace PadelPass.Infrastructure.ExceptionHandling;
 
@@ -14,8 +16,8 @@ public class ErrorHandlingMiddleware
     public ErrorHandlingMiddleware(RequestDelegate next,
         ILogger<ErrorHandlingMiddleware> logger)
     {
-        _next    = next;
-        _logger  = logger;
+        _next = next;
+        _logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
@@ -33,11 +35,15 @@ public class ErrorHandlingMiddleware
 
     private static Task HandleExceptionAsync(HttpContext ctx, Exception ex)
     {
-        var resp = ApiResponse.Fail("An unexpected error occurred.");
+        // Try to get the localizer from DI container
+        var localizer = ctx.RequestServices.GetService<IGlobalLocalizer>();
+        var errorMessage = localizer?["UnexpectedErrorOccurred"] ?? "An unexpected error occurred.";
+        
+        var resp = ApiResponse.Fail(errorMessage);
         var result = JsonSerializer.Serialize(resp);
 
         ctx.Response.ContentType = "application/json";
-        ctx.Response.StatusCode  = (int)HttpStatusCode.InternalServerError;
+        ctx.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         return ctx.Response.WriteAsync(result);
     }
 }

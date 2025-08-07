@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using PadelPass.Application;
 using PadelPass.Core.Common;
@@ -78,11 +79,17 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SetDefaultCulture(LocalizationSettings.DefaultCulture)
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
+    options.RequestCultureProviders.Insert(0, new AcceptLanguageHeaderRequestCultureProvider());
+    
 });
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseRequestLocalization();
 
 if (app.Environment.IsDevelopment())
 {

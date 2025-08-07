@@ -21,6 +21,8 @@ public static class ServiceCollectionExtensions
 
         // Register service
         services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<ITimeZoneService, TimeZoneService>();
+        services.AddScoped<IGlobalLocalizer, GlobalLocalizer>();
 
         services.AddIdentityCore<ApplicationUser>(opts => { opts.User.RequireUniqueEmail = true; })
             .AddRoles<IdentityRole>()

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="NotFound" xml:space="preserve">
+    <value>غير موجود</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>المستخدم غير موجود</value>
+  </data>
+  <data name="ClubNotFound" xml:space="preserve">
+    <value>النادي غير موجود</value>
+  </data>
+  <data name="SubscriptionPlanNotFound" xml:space="preserve">
+    <value>خطة الاشتراك غير موجودة</value>
+  </data>
+  <data name="SubscriptionNotFound" xml:space="preserve">
+    <value>الاشتراك غير موجود</value>
+  </data>
+  <data name="NonPeakSlotNotFound" xml:space="preserve">
+    <value>فترة الوقت غير المزدحم غير موجودة</value>
+  </data>
+  <data name="ClubUserNotFound" xml:space="preserve">
+    <value>مستخدم النادي غير موجود</value>
+  </data>
+  
+  <!-- Success Messages -->
+  <data name="CreatedSuccessfully" xml:space="preserve">
+    <value>تم الإنشاء بنجاح</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>تم التحديث بنجاح</value>
+  </data>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>تم الحذف بنجاح</value>
+  </data>
+  <data name="ClubCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء النادي بنجاح</value>
+  </data>
+  <data name="ClubUpdatedSuccessfully" xml:space="preserve">
+    <value>تم تحديث النادي بنجاح</value>
+  </data>
+  <data name="ClubDeletedSuccessfully" xml:space="preserve">
+    <value>تم حذف النادي بنجاح</value>
+  </data>
+  <data name="SubscriptionPlanCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء خطة الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionPlanUpdatedSuccessfully" xml:space="preserve">
+    <value>تم تحديث خطة الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionPlanDeletedSuccessfully" xml:space="preserve">
+    <value>تم حذف خطة الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionUpdatedSuccessfully" xml:space="preserve">
+    <value>تم تحديث الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionDeletedSuccessfully" xml:space="preserve">
+    <value>تم حذف الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionCanceledSuccessfully" xml:space="preserve">
+    <value>تم إلغاء الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionExtendedSuccessfully" xml:space="preserve">
+    <value>تم تمديد الاشتراك بنجاح</value>
+  </data>
+  <data name="SubscriptionPausedSuccessfully" xml:space="preserve">
+    <value>تم إيقاف الاشتراك مؤقتاً بنجاح</value>
+  </data>
+  <data name="SubscriptionResumedSuccessfully" xml:space="preserve">
+    <value>تم استئناف الاشتراك بنجاح</value>
+  </data>
+  <data name="NonPeakSlotCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء فترة الوقت غير المزدحم بنجاح</value>
+  </data>
+  <data name="NonPeakSlotUpdatedSuccessfully" xml:space="preserve">
+    <value>تم تحديث فترة الوقت غير المزدحم بنجاح</value>
+  </data>
+  <data name="NonPeakSlotDeletedSuccessfully" xml:space="preserve">
+    <value>تم حذف فترة الوقت غير المزدحم بنجاح</value>
+  </data>
+  <data name="ClubUserCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء مستخدم النادي بنجاح</value>
+  </data>
+  <data name="ClubUserUpdatedSuccessfully" xml:space="preserve">
+    <value>تم تحديث مستخدم النادي بنجاح</value>
+  </data>
+  <data name="ClubUserDeletedSuccessfully" xml:space="preserve">
+    <value>تم حذف مستخدم النادي بنجاح</value>
+  </data>
+  <data name="CheckInSuccessful" xml:space="preserve">
+    <value>تم تسجيل الحضور بنجاح لـ {0}</value>
+  </data>
+  
+  <!-- Authentication Messages -->
+  <data name="UserWithEmailExists" xml:space="preserve">
+    <value>يوجد مستخدم بهذا البريد الإلكتروني بالفعل</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>البريد الإلكتروني أو كلمة المرور غير صحيحة</value>
+  </data>
+  <data name="InvalidRefreshToken" xml:space="preserve">
+    <value>رمز التحديث غير صالح</value>
+  </data>
+  <data name="RefreshTokenExpired" xml:space="preserve">
+    <value>انتهت صلاحية رمز التحديث</value>
+  </data>
+  <data name="AdminUserCreatedSuccessfully" xml:space="preserve">
+    <value>تم إنشاء المستخدم المشرف بنجاح</value>
+  </data>
+  <data name="LogoutSuccessful" xml:space="preserve">
+    <value>تم تسجيل الخروج بنجاح</value>
+  </data>
+  <data name="UserNotAuthenticated" xml:space="preserve">
+    <value>المستخدم غير مصدق عليه</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>غير مُرَخَّص</value>
+  </data>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>وصول غير مُرَخَّص</value>
+  </data>
+  
+  <!-- Validation Messages -->
+  <data name="EmailRequired" xml:space="preserve">
+    <value>البريد الإلكتروني مطلوب</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>تنسيق البريد الإلكتروني غير صحيح</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>رقم الهاتف مطلوب</value>
+  </data>
+  <data name="PhoneNumberMaxLength" xml:space="preserve">
+    <value>لا يمكن أن يتجاوز رقم الهاتف 20 رمزاً</value>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>الاسم الكامل مطلوب</value>
+  </data>
+  <data name="FullNameMaxLength" xml:space="preserve">
+    <value>لا يمكن أن يتجاوز الاسم الكامل 100 رمز</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>كلمة المرور مطلوبة</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>يجب أن تكون كلمة المرور على الأقل 6 أحرف</value>
+  </data>
+  <data name="PasswordMaxLength" xml:space="preserve">
+    <value>لا يمكن أن تتجاوز كلمة المرور 50 رمزاً</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>تأكيد كلمة المرور مطلوب</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>كلمات المرور غير متطابقة</value>
+  </data>
+  <data name="RefreshTokenRequired" xml:space="preserve">
+    <value>رمز التحديث مطلوب</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>الاسم مطلوب</value>
+  </data>
+  <data name="NameMaxLength" xml:space="preserve">
+    <value>لا يمكن أن يتجاوز الاسم {0} رمزاً</value>
+  </data>
+  <data name="NameMinLength" xml:space="preserve">
+    <value>يجب أن يكون الاسم على الأقل {0} أحرف</value>
+  </data>
+  <data name="AddressMaxLength" xml:space="preserve">
+    <value>لا يمكن أن يتجاوز العنوان 500 رمز</value>
+  </data>
+  <data name="LatitudeRange" xml:space="preserve">
+    <value>يجب أن يكون خط العرض بين -90 و 90</value>
+  </data>
+  <data name="LongitudeRange" xml:space="preserve">
+    <value>يجب أن يكون خط الطول بين -180 و 180</value>
+  </data>
+  <data name="DurationRequired" xml:space="preserve">
+    <value>المدة مطلوبة</value>
+  </data>
+  <data name="DurationRange" xml:space="preserve">
+    <value>يجب أن تكون المدة بين شهر واحد و 36 شهراً</value>
+  </data>
+  <data name="PriceRequired" xml:space="preserve">
+    <value>السعر مطلوب</value>
+  </data>
+  <data name="PriceGreaterThanZero" xml:space="preserve">
+    <value>يجب أن يكون السعر أكبر من 0</value>
+  </data>
+  <data name="ClubIdRequired" xml:space="preserve">
+    <value>معرف النادي مطلوب</value>
+  </data>
+  <data name="InvalidDayOfWeek" xml:space="preserve">
+    <value>يوم الأسبوع غير صحيح</value>
+  </data>
+  <data name="StartTimeRequired" xml:space="preserve">
+    <value>وقت البداية مطلوب</value>
+  </data>
+  <data name="EndTimeRequired" xml:space="preserve">
+    <value>وقت النهاية مطلوب</value>
+  </data>
+  <data name="EndTimeAfterStartTime" xml:space="preserve">
+    <value>يجب أن يكون وقت النهاية بعد وقت البداية</value>
+  </data>
+  <data name="PlanIdRequired" xml:space="preserve">
+    <value>معرف الخطة مطلوب</value>
+  </data>
+  <data name="AdditionalMonthsRequired" xml:space="preserve">
+    <value>عدد الأشهر الإضافية مطلوب</value>
+  </data>
+  <data name="AdditionalMonthsRange" xml:space="preserve">
+    <value>يجب أن تكون الأشهر الإضافية بين شهر واحد و 36 شهراً</value>
+  </data>
+  
+  <!-- Business Logic Error Messages -->
+  <data name="ErrorOccurredWhileRetrieving" xml:space="preserve">
+    <value>حدث خطأ أثناء استرداد {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileCreating" xml:space="preserve">
+    <value>حدث خطأ أثناء إنشاء {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileUpdating" xml:space="preserve">
+    <value>حدث خطأ أثناء تحديث {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileDeleting" xml:space="preserve">
+    <value>حدث خطأ أثناء حذف {0}</value>
+  </data>
+  <data name="ErrorOccurredDuringRegistration" xml:space="preserve">
+    <value>حدث خطأ أثناء تسجيل المستخدم</value>
+  </data>
+  <data name="ErrorOccurredDuringLogin" xml:space="preserve">
+    <value>حدث خطأ أثناء تسجيل الدخول</value>
+  </data>
+  <data name="ErrorOccurredWhileRefreshingToken" xml:space="preserve">
+    <value>حدث خطأ أثناء تحديث الرمز المميز</value>
+  </data>
+  <data name="ErrorOccurredWhileCreatingAdmin" xml:space="preserve">
+    <value>حدث خطأ أثناء إنشاء المستخدم المشرف</value>
+  </data>
+  <data name="ErrorOccurredDuringLogout" xml:space="preserve">
+    <value>حدث خطأ أثناء تسجيل الخروج</value>
+  </data>
+  <data name="ErrorOccurredWhileProcessingCheckIn" xml:space="preserve">
+    <value>حدث خطأ أثناء معالجة تسجيل الحضور</value>
+  </data>
+  <data name="UserAlreadyHasActiveSubscription" xml:space="preserve">
+    <value>المستخدم لديه اشتراك نشط بالفعل</value>
+  </data>
+  <data name="InvalidUserType" xml:space="preserve">
+    <value>نوع المستخدم غير صحيح</value>
+  </data>
+  <data name="UserIsNotCustomer" xml:space="preserve">
+    <value>المستخدم ليس عميلاً</value>
+  </data>
+  <data name="UserDoesNotHaveActiveSubscription" xml:space="preserve">
+    <value>المستخدم ليس لديه اشتراك نشط</value>
+  </data>
+  <data name="UserAlreadyCheckedInToday" xml:space="preserve">
+    <value>المستخدم قام بتسجيل الحضور في هذا النادي اليوم بالفعل</value>
+  </data>
+  <data name="CheckInOnlyDuringNonPeakHours" xml:space="preserve">
+    <value>تسجيل الحضور مسموح فقط خلال الأوقات غير المزدحمة</value>
+  </data>
+  <data name="SubscriptionNotActive" xml:space="preserve">
+    <value>الاشتراك غير نشط</value>
+  </data>
+  <data name="CannotExtendInactiveSubscription" xml:space="preserve">
+    <value>لا يمكن تمديد اشتراك غير نشط</value>
+  </data>
+  <data name="CannotPauseInactiveSubscription" xml:space="preserve">
+    <value>لا يمكن إيقاف اشتراك غير نشط مؤقتاً</value>
+  </data>
+  <data name="SubscriptionAlreadyPaused" xml:space="preserve">
+    <value>الاشتراك متوقف مؤقتاً بالفعل</value>
+  </data>
+  <data name="SubscriptionAlreadyExpired" xml:space="preserve">
+    <value>الاشتراك منتهي الصلاحية بالفعل</value>
+  </data>
+  <data name="CannotResumeInactiveSubscription" xml:space="preserve">
+    <value>لا يمكن استئناف اشتراك غير نشط</value>
+  </data>
+  <data name="SubscriptionNotPaused" xml:space="preserve">
+    <value>الاشتراك غير متوقف مؤقتاً</value>
+  </data>
+  <data name="SubscriptionHasNoRemainingDays" xml:space="preserve">
+    <value>الاشتراك ليس لديه أيام متبقية</value>
+  </data>
+  <data name="UserAlreadyAssociatedWithClub" xml:space="preserve">
+    <value>هذا المستخدم مرتبط بهذا النادي بالفعل</value>
+  </data>
+  <data name="PasswordConfirmationDoNotMatch" xml:space="preserve">
+    <value>كلمة المرور والتأكيد غير متطابقين</value>
+  </data>
+  <data name="FailedToCreateUser" xml:space="preserve">
+    <value>فشل في إنشاء المستخدم: {0}</value>
+  </data>
+  <data name="EitherUserIdOrRegisterDtoRequired" xml:space="preserve">
+    <value>يجب توفير معرف المستخدم أو بيانات التسجيل</value>
+  </data>
+  <data name="PhoneNumberBelongsToNonRegularUser" xml:space="preserve">
+    <value>رقم الهاتف ينتمي إلى مستخدم غير عادي</value>
+  </data>
+  <data name="NoUserFoundWithPhoneNumber" xml:space="preserve">
+    <value>لم يتم العثور على مستخدم برقم الهاتف {0}</value>
+  </data>
+  <data name="UserIsNotRegularUser" xml:space="preserve">
+    <value>المستخدم بالمعرف {0} ليس مستخدماً عادياً</value>
+  </data>
+  <data name="NoAccessToClubs" xml:space="preserve">
+    <value>ليس لديك إمكانية الوصول إلى أي نادي</value>
+  </data>
+  <data name="NoAccessToThisClub" xml:space="preserve">
+    <value>ليس لديك إمكانية الوصول إلى هذا النادي</value>
+  </data>
+  <data name="UnauthorizedToUpdateSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لتحديث هذا الاشتراك</value>
+  </data>
+  <data name="UnauthorizedToDeleteSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لحذف هذا الاشتراك</value>
+  </data>
+  <data name="UnauthorizedToCancelSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لإلغاء هذا الاشتراك</value>
+  </data>
+  <data name="UnauthorizedToExtendSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لتمديد هذا الاشتراك</value>
+  </data>
+  <data name="UnauthorizedToPauseSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لإيقاف هذا الاشتراك مؤقتاً</value>
+  </data>
+  <data name="UnauthorizedToResumeSubscription" xml:space="preserve">
+    <value>غير مُرَخَّص لاستئناف هذا الاشتراك</value>
+  </data>
+  <data name="UnexpectedErrorOccurred" xml:space="preserve">
+    <value>حدث خطأ غير متوقع.</value>
+  </data>
+  
+  <!-- Entity Names -->
+  <data name="Club" xml:space="preserve">
+    <value>النادي</value>
+  </data>
+  <data name="SubscriptionPlan" xml:space="preserve">
+    <value>خطة الاشتراك</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>الاشتراك</value>
+  </data>
+  <data name="NonPeakSlot" xml:space="preserve">
+    <value>فترة الوقت غير المزدحم</value>
+  </data>
+  <data name="ClubUser" xml:space="preserve">
+    <value>مستخدم النادي</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+</root>

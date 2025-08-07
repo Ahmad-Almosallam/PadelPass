@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found</value>
+  </data>
+  <data name="ClubNotFound" xml:space="preserve">
+    <value>Club not found</value>
+  </data>
+  <data name="SubscriptionPlanNotFound" xml:space="preserve">
+    <value>Subscription plan not found</value>
+  </data>
+  <data name="SubscriptionNotFound" xml:space="preserve">
+    <value>Subscription not found</value>
+  </data>
+  <data name="NonPeakSlotNotFound" xml:space="preserve">
+    <value>Non-peak slot not found</value>
+  </data>
+  <data name="ClubUserNotFound" xml:space="preserve">
+    <value>Club user not found</value>
+  </data>
+  
+  <!-- Success Messages -->
+  <data name="CreatedSuccessfully" xml:space="preserve">
+    <value>Created successfully</value>
+  </data>
+  <data name="UpdatedSuccessfully" xml:space="preserve">
+    <value>Updated successfully</value>
+  </data>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>Deleted successfully</value>
+  </data>
+  <data name="ClubCreatedSuccessfully" xml:space="preserve">
+    <value>Club created successfully</value>
+  </data>
+  <data name="ClubUpdatedSuccessfully" xml:space="preserve">
+    <value>Club updated successfully</value>
+  </data>
+  <data name="ClubDeletedSuccessfully" xml:space="preserve">
+    <value>Club deleted successfully</value>
+  </data>
+  <data name="SubscriptionPlanCreatedSuccessfully" xml:space="preserve">
+    <value>Subscription plan created successfully</value>
+  </data>
+  <data name="SubscriptionPlanUpdatedSuccessfully" xml:space="preserve">
+    <value>Subscription plan updated successfully</value>
+  </data>
+  <data name="SubscriptionPlanDeletedSuccessfully" xml:space="preserve">
+    <value>Subscription plan deleted successfully</value>
+  </data>
+  <data name="SubscriptionCreatedSuccessfully" xml:space="preserve">
+    <value>Subscription created successfully</value>
+  </data>
+  <data name="SubscriptionUpdatedSuccessfully" xml:space="preserve">
+    <value>Subscription updated successfully</value>
+  </data>
+  <data name="SubscriptionDeletedSuccessfully" xml:space="preserve">
+    <value>Subscription deleted successfully</value>
+  </data>
+  <data name="SubscriptionCanceledSuccessfully" xml:space="preserve">
+    <value>Subscription canceled successfully</value>
+  </data>
+  <data name="SubscriptionExtendedSuccessfully" xml:space="preserve">
+    <value>Subscription extended successfully</value>
+  </data>
+  <data name="SubscriptionPausedSuccessfully" xml:space="preserve">
+    <value>Subscription paused successfully</value>
+  </data>
+  <data name="SubscriptionResumedSuccessfully" xml:space="preserve">
+    <value>Subscription resumed successfully</value>
+  </data>
+  <data name="NonPeakSlotCreatedSuccessfully" xml:space="preserve">
+    <value>Non-peak slot created successfully</value>
+  </data>
+  <data name="NonPeakSlotUpdatedSuccessfully" xml:space="preserve">
+    <value>Non-peak slot updated successfully</value>
+  </data>
+  <data name="NonPeakSlotDeletedSuccessfully" xml:space="preserve">
+    <value>Non-peak slot deleted successfully</value>
+  </data>
+  <data name="ClubUserCreatedSuccessfully" xml:space="preserve">
+    <value>Club user created successfully</value>
+  </data>
+  <data name="ClubUserUpdatedSuccessfully" xml:space="preserve">
+    <value>Club user updated successfully</value>
+  </data>
+  <data name="ClubUserDeletedSuccessfully" xml:space="preserve">
+    <value>Club user deleted successfully</value>
+  </data>
+  <data name="CheckInSuccessful" xml:space="preserve">
+    <value>Check-in successful for {0}</value>
+  </data>
+  
+  <!-- Authentication Messages -->
+  <data name="UserWithEmailExists" xml:space="preserve">
+    <value>User with this email already exists</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Invalid email or password</value>
+  </data>
+  <data name="InvalidRefreshToken" xml:space="preserve">
+    <value>Invalid refresh token</value>
+  </data>
+  <data name="RefreshTokenExpired" xml:space="preserve">
+    <value>Refresh token has expired</value>
+  </data>
+  <data name="AdminUserCreatedSuccessfully" xml:space="preserve">
+    <value>Admin user created successfully</value>
+  </data>
+  <data name="LogoutSuccessful" xml:space="preserve">
+    <value>Logout successful</value>
+  </data>
+  <data name="UserNotAuthenticated" xml:space="preserve">
+    <value>User not authenticated</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>Unauthorized access</value>
+  </data>
+  
+  <!-- Validation Messages -->
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>Phone number is required</value>
+  </data>
+  <data name="PhoneNumberMaxLength" xml:space="preserve">
+    <value>Phone number cannot exceed 20 characters</value>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>Full name is required</value>
+  </data>
+  <data name="FullNameMaxLength" xml:space="preserve">
+    <value>Full name cannot exceed 100 characters</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>Password must be at least 6 characters long</value>
+  </data>
+  <data name="PasswordMaxLength" xml:space="preserve">
+    <value>Password cannot exceed 50 characters</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>Confirm password is required</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+  </data>
+  <data name="RefreshTokenRequired" xml:space="preserve">
+    <value>Refresh token is required</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="NameMaxLength" xml:space="preserve">
+    <value>Name cannot exceed {0} characters</value>
+  </data>
+  <data name="NameMinLength" xml:space="preserve">
+    <value>Name must be at least {0} characters long</value>
+  </data>
+  <data name="AddressMaxLength" xml:space="preserve">
+    <value>Address cannot exceed 500 characters</value>
+  </data>
+  <data name="LatitudeRange" xml:space="preserve">
+    <value>Latitude must be between -90 and 90</value>
+  </data>
+  <data name="LongitudeRange" xml:space="preserve">
+    <value>Longitude must be between -180 and 180</value>
+  </data>
+  <data name="DurationRequired" xml:space="preserve">
+    <value>Duration is required</value>
+  </data>
+  <data name="DurationRange" xml:space="preserve">
+    <value>Duration must be between 1 and 36 months</value>
+  </data>
+  <data name="PriceRequired" xml:space="preserve">
+    <value>Price is required</value>
+  </data>
+  <data name="PriceGreaterThanZero" xml:space="preserve">
+    <value>Price must be greater than 0</value>
+  </data>
+  <data name="ClubIdRequired" xml:space="preserve">
+    <value>Club ID is required</value>
+  </data>
+  <data name="InvalidDayOfWeek" xml:space="preserve">
+    <value>Invalid day of week</value>
+  </data>
+  <data name="StartTimeRequired" xml:space="preserve">
+    <value>Start time is required</value>
+  </data>
+  <data name="EndTimeRequired" xml:space="preserve">
+    <value>End time is required</value>
+  </data>
+  <data name="EndTimeAfterStartTime" xml:space="preserve">
+    <value>End time must be after start time</value>
+  </data>
+  <data name="PlanIdRequired" xml:space="preserve">
+    <value>Plan ID is required</value>
+  </data>
+  <data name="AdditionalMonthsRequired" xml:space="preserve">
+    <value>Number of additional months is required</value>
+  </data>
+  <data name="AdditionalMonthsRange" xml:space="preserve">
+    <value>Additional months must be between 1 and 36</value>
+  </data>
+  
+  <!-- Business Logic Error Messages -->
+  <data name="ErrorOccurredWhileRetrieving" xml:space="preserve">
+    <value>An error occurred while retrieving the {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileCreating" xml:space="preserve">
+    <value>An error occurred while creating the {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileUpdating" xml:space="preserve">
+    <value>An error occurred while updating the {0}</value>
+  </data>
+  <data name="ErrorOccurredWhileDeleting" xml:space="preserve">
+    <value>An error occurred while deleting the {0}</value>
+  </data>
+  <data name="ErrorOccurredDuringRegistration" xml:space="preserve">
+    <value>An error occurred during user registration</value>
+  </data>
+  <data name="ErrorOccurredDuringLogin" xml:space="preserve">
+    <value>An error occurred during login</value>
+  </data>
+  <data name="ErrorOccurredWhileRefreshingToken" xml:space="preserve">
+    <value>An error occurred while refreshing the token</value>
+  </data>
+  <data name="ErrorOccurredWhileCreatingAdmin" xml:space="preserve">
+    <value>An error occurred while creating the admin user</value>
+  </data>
+  <data name="ErrorOccurredDuringLogout" xml:space="preserve">
+    <value>An error occurred during logout</value>
+  </data>
+  <data name="ErrorOccurredWhileProcessingCheckIn" xml:space="preserve">
+    <value>An error occurred while processing the check-in</value>
+  </data>
+  <data name="UserAlreadyHasActiveSubscription" xml:space="preserve">
+    <value>User already has an active subscription</value>
+  </data>
+  <data name="InvalidUserType" xml:space="preserve">
+    <value>Invalid user type</value>
+  </data>
+  <data name="UserIsNotCustomer" xml:space="preserve">
+    <value>User is not an customer</value>
+  </data>
+  <data name="UserDoesNotHaveActiveSubscription" xml:space="preserve">
+    <value>User does not have an active subscription</value>
+  </data>
+  <data name="UserAlreadyCheckedInToday" xml:space="preserve">
+    <value>User has already checked in to this club today</value>
+  </data>
+  <data name="CheckInOnlyDuringNonPeakHours" xml:space="preserve">
+    <value>Check-in is only allowed during non-peak hours</value>
+  </data>
+  <data name="SubscriptionNotActive" xml:space="preserve">
+    <value>Subscription is not active</value>
+  </data>
+  <data name="CannotExtendInactiveSubscription" xml:space="preserve">
+    <value>Cannot extend an inactive subscription</value>
+  </data>
+  <data name="CannotPauseInactiveSubscription" xml:space="preserve">
+    <value>Cannot pause an inactive subscription</value>
+  </data>
+  <data name="SubscriptionAlreadyPaused" xml:space="preserve">
+    <value>Subscription is already paused</value>
+  </data>
+  <data name="SubscriptionAlreadyExpired" xml:space="preserve">
+    <value>Subscription has already expired</value>
+  </data>
+  <data name="CannotResumeInactiveSubscription" xml:space="preserve">
+    <value>Cannot resume an inactive subscription</value>
+  </data>
+  <data name="SubscriptionNotPaused" xml:space="preserve">
+    <value>Subscription is not paused</value>
+  </data>
+  <data name="SubscriptionHasNoRemainingDays" xml:space="preserve">
+    <value>Subscription has no remaining days</value>
+  </data>
+  <data name="UserAlreadyAssociatedWithClub" xml:space="preserve">
+    <value>This user is already associated with this club</value>
+  </data>
+  <data name="PasswordConfirmationDoNotMatch" xml:space="preserve">
+    <value>Password and confirmation do not match</value>
+  </data>
+  <data name="FailedToCreateUser" xml:space="preserve">
+    <value>Failed to create user: {0}</value>
+  </data>
+  <data name="EitherUserIdOrRegisterDtoRequired" xml:space="preserve">
+    <value>Either UserId or RegisterDto must be provided</value>
+  </data>
+  <data name="PhoneNumberBelongsToNonRegularUser" xml:space="preserve">
+    <value>The phone number belongs to a non-regular user</value>
+  </data>
+  <data name="NoUserFoundWithPhoneNumber" xml:space="preserve">
+    <value>No user found with phone number {0}</value>
+  </data>
+  <data name="UserIsNotRegularUser" xml:space="preserve">
+    <value>User with ID {0} is not a regular user</value>
+  </data>
+  <data name="NoAccessToClubs" xml:space="preserve">
+    <value>You don't have access to any clubs</value>
+  </data>
+  <data name="NoAccessToThisClub" xml:space="preserve">
+    <value>You don't have access to this club</value>
+  </data>
+  <data name="UnauthorizedToUpdateSubscription" xml:space="preserve">
+    <value>Unauthorized to update this subscription</value>
+  </data>
+  <data name="UnauthorizedToDeleteSubscription" xml:space="preserve">
+    <value>Unauthorized to delete this subscription</value>
+  </data>
+  <data name="UnauthorizedToCancelSubscription" xml:space="preserve">
+    <value>Unauthorized to cancel this subscription</value>
+  </data>
+  <data name="UnauthorizedToExtendSubscription" xml:space="preserve">
+    <value>Unauthorized to extend this subscription</value>
+  </data>
+  <data name="UnauthorizedToPauseSubscription" xml:space="preserve">
+    <value>Unauthorized to pause this subscription</value>
+  </data>
+  <data name="UnauthorizedToResumeSubscription" xml:space="preserve">
+    <value>Unauthorized to resume this subscription</value>
+  </data>
+  <data name="UnexpectedErrorOccurred" xml:space="preserve">
+    <value>An unexpected error occurred.</value>
+  </data>
+  
+  <!-- Entity Names -->
+  <data name="Club" xml:space="preserve">
+    <value>club</value>
+  </data>
+  <data name="SubscriptionPlan" xml:space="preserve">
+    <value>subscription plan</value>
+  </data>
+  <data name="Subscription" xml:space="preserve">
+    <value>subscription</value>
+  </data>
+  <data name="NonPeakSlot" xml:space="preserve">
+    <value>non-peak slot</value>
+  </data>
+  <data name="ClubUser" xml:space="preserve">
+    <value>club user</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>user</value>
+  </data>
+</root>
