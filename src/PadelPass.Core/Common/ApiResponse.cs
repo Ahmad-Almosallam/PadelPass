@@ -1,4 +1,6 @@
-﻿namespace PadelPass.Core.Common;
+﻿using System.Net;
+
+namespace PadelPass.Core.Common;
 
 // Core/Common/ApiResponse.cs
 public class ApiResponse<T>
@@ -37,4 +39,11 @@ public class ApiResponse
 
     public static ApiResponse<object> Fail(string error) =>
         new() { Success = false, Errors = new List<string> { error } };
+}
+
+public class ErrorModel
+{
+    public string Key { get; set; }
+
+    public List<string> Errors { get; set; }
 }

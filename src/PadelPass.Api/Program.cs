@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PadelPass.Api.Filters;
@@ -24,7 +25,15 @@ builder.Host.UseSerilog();
 
 
 // Core Services
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(opt =>
+    {
+        opt.InvalidModelStateResponseFactory = actionContext =>
+        {
+            var errors = actionContext.ModelState.SelectMany(x => x.Value.Errors.Select(q => q.ErrorMessage));
+            return new BadRequestObjectResult(ApiResponse.Fail(errors));
+        };
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -139,4 +148,5 @@ catch (Exception e)
     Console.WriteLine(e);
     throw;
 }
+
 app.Run();
