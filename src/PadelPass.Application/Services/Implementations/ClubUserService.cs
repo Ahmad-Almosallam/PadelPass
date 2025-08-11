@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PadelPass.Application.DTOs.ClubUsers;
 using PadelPass.Core.Common;
+using PadelPass.Core.Common.Enums;
 using PadelPass.Core.Constants;
 using PadelPass.Core.Entities;
 using PadelPass.Core.Repositories;
@@ -146,6 +147,15 @@ namespace PadelPass.Application.Services.Implementations
                     var existingUser = await _userManager.FindByEmailAsync(registerDto.Email);
                     if (existingUser != null)
                         return ApiResponse<ClubUserDto>.Fail(_localizer["UserWithEmailExists"]);
+                    
+                    
+                    var userExists = await _userManager.Users.AnyAsync(x => x.PhoneNumber == registerDto.PhoneNumber);
+                    if (userExists)
+                    {
+                        return ApiResponse<ClubUserDto>.Fail(
+                            _localizer["UserWithPhoneNumberExists", registerDto.PhoneNumber]
+                        );
+                    }
 
                     user = new ApplicationUser
                     {
@@ -153,6 +163,7 @@ namespace PadelPass.Application.Services.Implementations
                         Email = registerDto.Email,
                         FullName = registerDto.FullName,
                         PhoneNumber = registerDto.PhoneNumber,
+                        UserType = UserType.BranchUser,
                         EmailConfirmed = true
                     };
 
@@ -227,6 +238,7 @@ namespace PadelPass.Application.Services.Implementations
                     return ApiResponse<ClubUserDto>.Fail(_localizer["ClubUserNotFound"]);
 
                 clubUser.IsActive = dto.IsActive;
+                clubUser.User.IsActive = dto.IsActive;
                 _repository.Update(clubUser);
                 await _repository.SaveChangesAsync();
 
@@ -252,9 +264,25 @@ namespace PadelPass.Application.Services.Implementations
                 var clubUser = await _repository.GetByIdAsync(id);
                 if (clubUser == null)
                     return ApiResponse<bool>.Fail(_localizer["ClubUserNotFound"]);
-
-                _repository.Delete(clubUser);
-                await _repository.SaveChangesAsync();
+                
+                
+                var user = await _userManager.FindByIdAsync(clubUser.UserId);
+                if (user == null)
+                {
+                    return ApiResponse<bool>.Fail(_localizer["UserNotFound"]);
+                }
+                
+                if (await _userManager.IsInRoleAsync(user, AppRoles.ClubUser))
+                {
+                    var res = await _userManager.DeleteAsync(user);
+                    if (!res.Succeeded)
+                    {
+                        var errors = string.Join(", ", res.Errors.Select(e => e.Description));
+                        return ApiResponse<bool>.Fail(
+                            _localizer["FailedToDeleteUser", errors]
+                        );
+                    }
+                }
 
                 return ApiResponse<bool>.Ok(
                     true,
@@ -365,7 +393,7 @@ namespace PadelPass.Application.Services.Implementations
             }
         }
 
-        public async Task<ApiResponse<UserSearchDto>> GetUserWithSubscriptionDetailsAsync(string userId)
+        public async Task<ApiResponse<UserSearchDto>> GetUserWithSubscriptionDetailsAsync(string phoneNumber)
         {
             try
             {
@@ -377,18 +405,18 @@ namespace PadelPass.Application.Services.Implementations
                 if (!isAdmin && !isClubUser)
                     return ApiResponse<UserSearchDto>.Fail(_localizer["UnauthorizedAccess"]);
 
-                var user = await _userManager.FindByIdAsync(userId);
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
                 if (user == null)
                     return ApiResponse<UserSearchDto>.Fail(_localizer["UserNotFound"]);
 
                 if (!await _userManager.IsInRoleAsync(user, AppRoles.User))
                     return ApiResponse<UserSearchDto>.Fail(
-                        _localizer["UserIsNotRegularUser", userId]
+                        _localizer["UserIsNotRegularUser", phoneNumber]
                     );
 
                 var subscription = await _subscriptionRepository.AsQueryable(false)
                     .Include(s => s.Plan)
-                    .Where(s => s.UserId == userId && s.IsActive && !s.IsPaused && s.EndDate > DateTimeOffset.UtcNow)
+                    .Where(s => s.UserId == user.Id && s.IsActive && !s.IsPaused && s.EndDate > DateTimeOffset.UtcNow)
                     .OrderByDescending(s => s.EndDate)
                     .FirstOrDefaultAsync();
 
@@ -408,7 +436,7 @@ namespace PadelPass.Application.Services.Implementations
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting user with subscription details for user ID {UserId}", userId);
+                _logger.LogError(ex, "Error getting user with subscription details for user ID {UserId}", phoneNumber);
                 return ApiResponse<UserSearchDto>.Fail(
                     _localizer["ErrorOccurredWhileRetrieving", _localizer["User"]]
                 );

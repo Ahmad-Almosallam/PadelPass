@@ -60,6 +60,7 @@ public class SubscriptionsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(AppRoles.User)]
     public async Task<ActionResult<ApiResponse<SubscriptionDto>>> Create(
         [FromBody] CreateSubscriptionDto dto)
     {

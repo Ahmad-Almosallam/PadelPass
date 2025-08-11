@@ -14,6 +14,7 @@ public class ApplicationUser : IdentityUser
     public string FullName { get; set; }
 
     public UserType UserType { get; set; }
+    public bool IsActive { get; set; }
     public int? CurrentSubscriptionId { get; set; }
 
     [ForeignKey(nameof(CurrentSubscriptionId))]

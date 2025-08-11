@@ -53,14 +53,22 @@ public class AuthService
         try
         {
             // Check if user exists
-            var userExists = await _userManager.FindByEmailAsync(model.Email);
-            if (userExists != null)
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
                 return ApiResponse<AuthResponseDto>.Fail(_localizer["UserWithEmailExists"]);
             }
+            
+            var userExists = await _userManager.Users.AnyAsync(x => x.PhoneNumber == model.PhoneNumber);
+            if (userExists)
+            {
+                return ApiResponse<AuthResponseDto>.Fail(
+                    _localizer["UserWithPhoneNumberExists", model.PhoneNumber]
+                );
+            }
 
             // Create user
-            var user = new ApplicationUser
+            user = new ApplicationUser
             {
                 Email = model.Email,
                 UserName = model.Email,
@@ -104,7 +112,7 @@ public class AuthService
         {
             // Find user by email
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
+            if (user == null || !user.IsActive)
             {
                 return ApiResponse<AuthResponseDto>.Fail(_localizer["InvalidEmailOrPassword"]);
             }

@@ -103,11 +103,11 @@ public class ClubUsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("user-details/{userId}")]
+    [HttpGet("user-details/{phoneNumber}")]
     [Authorize(Roles = $"{AppRoles.Admin},{AppRoles.SuperAdmin},{AppRoles.ClubUser}")]
-    public async Task<ActionResult<ApiResponse<UserSearchDto>>> GetUserDetails(string userId)
+    public async Task<ActionResult<ApiResponse<UserSearchDto>>> GetUserDetails(string phoneNumber)
     {
-        var result = await _clubUserService.GetUserWithSubscriptionDetailsAsync(userId);
+        var result = await _clubUserService.GetUserWithSubscriptionDetailsAsync(phoneNumber);
         if (!result.Success)
         {
             return NotFound(result);
