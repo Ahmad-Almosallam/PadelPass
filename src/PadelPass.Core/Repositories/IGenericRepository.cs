@@ -60,7 +60,7 @@ public interface IGenericRepository<TEntity> where TEntity : BaseEntity
 
 
     bool Any(Expression<Func<TEntity, bool>> expression);
-    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
     int Count(Expression<Func<TEntity, bool>> expression);
     Task<int> CountAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default);
 

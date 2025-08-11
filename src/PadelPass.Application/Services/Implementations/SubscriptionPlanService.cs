@@ -17,19 +17,22 @@ namespace PadelPass.Application.Services.Implementations
         private readonly IMapper _mapper;
         private readonly ILogger<SubscriptionPlanService> _logger;
         private readonly IGlobalLocalizer _localizer;
+        private readonly IGenericRepository<Subscription> _subscriptionRepository;
 
         public SubscriptionPlanService(
             IGenericRepository<SubscriptionPlan> repository,
             ICurrentUserService currentUserService,
             IMapper mapper,
             IGlobalLocalizer localizer,
-            ILogger<SubscriptionPlanService> logger)
+            ILogger<SubscriptionPlanService> logger,
+            IGenericRepository<Subscription> subscriptionRepository)
         {
             _repository = repository;
             _currentUserService = currentUserService;
             _mapper = mapper;
             _localizer = localizer;
             _logger = logger;
+            _subscriptionRepository = subscriptionRepository;
         }
 
         public async Task<ApiResponse<SubscriptionPlanDto>> GetByIdAsync(int id)
@@ -136,6 +139,17 @@ namespace PadelPass.Application.Services.Implementations
                 if (plan == null)
                 {
                     return ApiResponse<bool>.Fail(_localizer["SubscriptionPlanNotFound"]);
+                }
+                
+                // Check if the plan is in use by any subscriptions
+                var isSubPlanInUse = await _subscriptionRepository
+                    .AnyAsync(s => s.PlanId == id);
+
+                if (isSubPlanInUse)
+                {
+                    return ApiResponse<bool>.Fail(
+                        _localizer["SubscriptionPlanInUse", _localizer["Subscription"]]
+                    );
                 }
 
                 _repository.Delete(plan);

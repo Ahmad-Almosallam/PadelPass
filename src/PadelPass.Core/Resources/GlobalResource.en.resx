@@ -358,4 +358,7 @@
   <data name="UserWithPhoneNumberExists" xml:space="preserve">
   <value>A user with the phone number {0} already exists.</value>
 </data>
+  <data name="SubscriptionPlanInUse" xml:space="preserve">
+    <value>Subscription plan is in use and cannot be deleted because there are active subscriptions.</value>
+  </data>
 </root>

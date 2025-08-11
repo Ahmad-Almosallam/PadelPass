@@ -358,4 +358,7 @@
   <data name="UserWithPhoneNumberExists" xml:space="preserve">
   <value>يوجد مستخدم بالفعل برقم الهاتف {0}.</value>
 </data>
+  <data name="SubscriptionPlanInUse" xml:space="preserve">
+    <value>لا يمكن حذف خطة الاشتراك لأنها مستخدمة من قبل اشتراكات نشطة.</value>
+  </data>
 </root>
