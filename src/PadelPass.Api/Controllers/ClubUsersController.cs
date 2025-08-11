@@ -81,28 +81,6 @@ public class ClubUsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("search-users")]
-    [Authorize(Roles = $"{AppRoles.Admin},{AppRoles.SuperAdmin},{AppRoles.ClubUser}")]
-    public async Task<ActionResult<ApiResponse<PaginatedList<UserSearchDto>>>> SearchUsers(
-        [FromQuery] string searchTerm = null,
-        [FromQuery] int? clubId = null,
-        [FromQuery] bool? hasActiveSubscription = null,
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
-    {
-        var query = new UserSearchQueryDto
-        {
-            SearchTerm = searchTerm,
-            ClubId = clubId,
-            HasActiveSubscription = hasActiveSubscription,
-            PageNumber = pageNumber,
-            PageSize = pageSize
-        };
-
-        var result = await _clubUserService.SearchUsersAsync(query);
-        return Ok(result);
-    }
-
     [HttpGet("user-details/{phoneNumber}")]
     [Authorize(Roles = $"{AppRoles.Admin},{AppRoles.SuperAdmin},{AppRoles.ClubUser}")]
     public async Task<ActionResult<ApiResponse<UserSearchDto>>> GetUserDetails(string phoneNumber)
